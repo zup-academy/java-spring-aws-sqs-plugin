@@ -43,6 +43,12 @@ hooks:
             snippet: snippets/snippet-pom-dependencyManagement.xml
           when:
             not-exists-snippet: snippets/snippet-pom-dependencyManagement.xml
+      - search:
+          string: "</dependencies>"
+          insert-before:
+            snippet: snippets/snippet-pom-dependency-starter-validation.xml
+          when:
+            not-exists: "spring-boot-starter-validation"
 
   ##
   # Edit application.yaml

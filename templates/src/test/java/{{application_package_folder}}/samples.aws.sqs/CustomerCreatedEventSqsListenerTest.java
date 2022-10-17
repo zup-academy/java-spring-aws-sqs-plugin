@@ -27,6 +27,10 @@ import static org.awaitility.Awaitility.await;
 @SpringBootTest
 @ActiveProfiles("test")
 @Import(SqsTestConfig.class)
+/**
+ * Here we start the listener on startup and we guarantee that
+ * it is stopped in the end of all tests
+ */
 @DirtiesContext
 @TestPropertySource(properties = {
         "cloud.aws.sqs.listener.auto-startup = true"

@@ -26,16 +26,9 @@ cloud:
 
 logging:
     level:
-        io:
-            awspring:
-                cloud:
-                    messaging:
-                        core: info
-                        listener: info
-        com:
-            amazonaws:
-                services:
-                    sqs: debug
+        io.awspring.cloud.messaging.core: info
+        io.awspring.cloud.messaging.listener: info
+        com.amazonaws.services.sqs: debug
 
 # Samples configuration
 samples.aws.sqs.producer-queue: newProductsQueue

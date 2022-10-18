@@ -6,6 +6,7 @@ import io.awspring.cloud.messaging.listener.SqsMessageDeletionPolicy;
 import io.awspring.cloud.messaging.listener.annotation.SqsListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -15,6 +16,16 @@ import org.springframework.stereotype.Component;
 import javax.validation.ConstraintViolationException;
 import java.util.Map;
 
+/**
+ * Simple condition to avoid initializing this listener when running integration tests that don't
+ * care about it.
+ *
+ * Unfortunately, this is necessary because Spring Cloud tries to resolve the @SqsListener's queue URL
+ * on startup, and if there's no SQS server up and running it crashes the application.
+ */
+@ConditionalOnProperty(
+        name = "cloud.aws.sqs.listener.auto-startup", havingValue = "true"
+)
 @Component
 public class CustomerCreatedEventSqsListener {
 
@@ -37,12 +48,18 @@ public class CustomerCreatedEventSqsListener {
                 messageId, event
         );
 
-        // converts to domain model and invokes your business logic
+        // converts to domain model and invokes the business logic
         Customer customer = event.toModel();
         repository.save(customer);
     }
 
-    @MessageExceptionHandler(ConstraintViolationException.class)
+    /**
+     * This is how we can handle errors with @SqsListener, and as you can see, it's very
+     * similar to Controller Advices
+     */
+    @MessageExceptionHandler({
+            ConstraintViolationException.class
+    })
     public void handleOnError(ConstraintViolationException exception,
                               @Payload CustomerCreatedEvent event,
                               @Headers Map<String, String> headers) {
@@ -53,6 +70,8 @@ public class CustomerCreatedEventSqsListener {
                 event,
                 exception
         );
+
+        // TODO: write your error handling logic here...
     }
 
 }

@@ -28,14 +28,14 @@ import static org.awaitility.Awaitility.await;
 @ActiveProfiles("test")
 @Import(SqsTestConfig.class)
 /**
- * Here we start the listener on startup and we guarantee that
- * it is stopped in the end of all tests
+ * Here we start the listener on startup, and we guarantee that
+ * it is stopped in the end of all tests by closing the application context
  */
 @DirtiesContext
 @TestPropertySource(properties = {
         "cloud.aws.sqs.listener.auto-startup = true"
 })
-class CustomerCreatedEventSqsListenerTest {
+class CustomerCreatedEventSqsListenerTest extends LocalstackIntegrationTest {
 
     @Autowired
     private QueueMessagingTemplate sqsTemplate;

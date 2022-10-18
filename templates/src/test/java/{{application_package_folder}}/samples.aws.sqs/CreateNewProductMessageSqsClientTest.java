@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class CreateNewProductMessageSqsClientTest {
+class CreateNewProductMessageSqsClientTest extends LocalstackIntegrationTest {
 
     @Autowired
     private CreateNewProductMessageSqsClient createNewProductMessageSqsClient;

@@ -1,6 +1,7 @@
 package {{application_package}}.samples.aws.sqs;
 
 import com.amazonaws.services.sqs.AmazonSQSAsync;
+import io.awspring.cloud.autoconfigure.messaging.SqsProperties;
 import io.awspring.cloud.core.env.ResourceIdResolver;
 import io.awspring.cloud.messaging.listener.SimpleMessageListenerContainer;
 import io.awspring.cloud.messaging.support.destination.DynamicQueueUrlDestinationResolver;
@@ -14,6 +15,9 @@ import org.springframework.messaging.core.DestinationResolver;
 
 @TestConfiguration
 public class SqsTestConfig {
+
+    @Autowired
+    private SqsProperties sqsProperties;
 
     /**
      * Configures the SimpleMessageListenerContainer to auto-create a SQS Queue in case it does not exist.
@@ -32,7 +36,6 @@ public class SqsTestConfig {
             @Override
             public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
                 if (bean instanceof SimpleMessageListenerContainer container) {
-                    container.setQueueStopTimeout(500);
                     container.setDestinationResolver(destinationResolver);
                 }
                 return bean;

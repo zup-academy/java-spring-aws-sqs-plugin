@@ -1,5 +1,6 @@
 package {{application_package}}.samples.aws.sqs;
 
+import {{application_package}}.samples.aws.sqs.base.LocalstackIntegrationTest;
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
 import io.awspring.cloud.messaging.core.QueueMessagingTemplate;
@@ -9,8 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,8 +18,6 @@ import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
-@ActiveProfiles("test")
 class CreateNewProductMessageSqsClientTest extends LocalstackIntegrationTest {
 
     @Autowired

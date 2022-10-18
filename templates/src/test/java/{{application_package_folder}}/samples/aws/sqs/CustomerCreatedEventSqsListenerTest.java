@@ -1,5 +1,6 @@
 package {{application_package}}.samples.aws.sqs;
 
+import {{application_package}}.samples.aws.sqs.base.LocalstackIntegrationTest;
 import {{application_package}}.samples.aws.sqs.model.CustomerRepository;
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
@@ -10,10 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
@@ -24,9 +22,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
-@SpringBootTest
-@ActiveProfiles("test")
-@Import(SqsTestConfig.class)
 /**
  * Here we start the listener on startup, and we guarantee that
  * it is stopped in the end of all tests by closing the application context

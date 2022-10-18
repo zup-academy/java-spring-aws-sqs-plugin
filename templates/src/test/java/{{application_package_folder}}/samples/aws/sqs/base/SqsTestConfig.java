@@ -1,4 +1,4 @@
-package {{application_package}}.samples.aws.sqs;
+package {{application_package}}.samples.aws.sqs.base;
 
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import io.awspring.cloud.autoconfigure.messaging.SqsProperties;

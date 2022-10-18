@@ -10,6 +10,8 @@ Applying this plugin into a Spring Boot project will prepare and configure it fo
 4. Configures Docker Compose with Localstack so that you can run your application locally;
 5. Generates production and test sample code so that you have a starting point for writing good production integration tests for SQS producers and consumers;
 
+As you can see, the beauty of this plugin is that **you DO NOT need an AWS account to write and run your application locally or even to run your integration tests** 🥳🥳
+
 
 ## How to use
 

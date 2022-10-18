@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.validation.ConstraintViolationException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -77,6 +78,33 @@ class CreateNewProductMessageSqsClientTest extends LocalstackIntegrationTest {
         // validation
         assertThat(exception)
                 .hasMessage("message can not be null");
+
+        // ...and verify side-effects
+        assertThat(numberOfMessagesInQueue()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("should not send a new product message to a SQS queue when message is invalid")
+    public void t3() {
+
+        // scenario
+        NewProductMessage invalidMessage = new NewProductMessage(
+                "",
+                new BigDecimal("-1.42"),
+                LocalDateTime.now()
+        );
+
+        // action
+        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> {
+            createNewProductMessageSqsClient.send(invalidMessage);
+        });
+
+        // validation
+        assertThat(exception)
+                .hasMessageContainingAll(
+                        "message.name: must not be empty",
+                        "message.price: must be greater than 0"
+                );
 
         // ...and verify side-effects
         assertThat(numberOfMessagesInQueue()).isEqualTo(0);

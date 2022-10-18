@@ -32,7 +32,7 @@ git status
 
 Nice! You're ready for production I guess 🥳
 
-[See here the benefits and how to use the Java Spring Data JPA Plugin](https://www.youtube.com/watch?v=amlI3pHkyh8)
+[See here the benefits and how you can get the most out of the Java Spring AWS SQS Plugin](http://video-will-be-published.soon/)
 
 ## Support
 

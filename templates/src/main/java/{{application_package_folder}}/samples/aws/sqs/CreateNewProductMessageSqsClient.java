@@ -5,8 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
 
 @Service
+@Validated
 public class CreateNewProductMessageSqsClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateNewProductMessageSqsClient.class);
@@ -23,8 +27,11 @@ public class CreateNewProductMessageSqsClient {
     /**
      * Send a new product message to SQS queue
      */
-    public void send(NewProductMessage message) {
+    public void send(@Valid NewProductMessage message) {
 
+        /**
+         * Tip: you can write your business logic here before sending the message to SQS
+         */
         if (message == null) {
             throw new IllegalArgumentException("message can not be null");
         }

@@ -40,3 +40,10 @@
 			<version>1.17.5</version>
 			<scope>test</scope>
 		</dependency>
+
+        <dependency>
+			<groupId>org.junit-pioneer</groupId>
+			<artifactId>junit-pioneer</artifactId>
+			<version>1.7.1</version>
+			<scope>test</scope>
+		</dependency>

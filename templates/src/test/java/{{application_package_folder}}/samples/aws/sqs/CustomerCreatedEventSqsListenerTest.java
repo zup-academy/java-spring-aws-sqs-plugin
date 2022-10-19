@@ -1,6 +1,6 @@
 package {{application_package}}.samples.aws.sqs;
 
-import {{application_package}}.samples.aws.sqs.base.LocalstackIntegrationTest;
+import {{application_package}}.samples.aws.sqs.base.SqsIntegrationTest;
 import {{application_package}}.samples.aws.sqs.model.CustomerRepository;
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
@@ -30,7 +30,7 @@ import static org.awaitility.Awaitility.await;
 @TestPropertySource(properties = {
         "cloud.aws.sqs.listener.auto-startup = true"
 })
-class CustomerCreatedEventSqsListenerTest extends LocalstackIntegrationTest {
+class CustomerCreatedEventSqsListenerTest extends SqsIntegrationTest {
 
     @Autowired
     private QueueMessagingTemplate sqsTemplate;

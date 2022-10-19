@@ -1,6 +1,6 @@
 package {{application_package}}.samples.aws.sqs;
 
-import {{application_package}}.samples.aws.sqs.base.LocalstackIntegrationTest;
+import {{application_package}}.samples.aws.sqs.base.SqsIntegrationTest;
 import com.amazonaws.services.sqs.AmazonSQSAsync;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
 import io.awspring.cloud.messaging.core.QueueMessagingTemplate;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -19,7 +20,7 @@ import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class CreateNewProductMessageSqsClientTest extends LocalstackIntegrationTest {
+class CreateNewProductMessageSqsClientTest extends SqsIntegrationTest {
 
     @Autowired
     private CreateNewProductMessageSqsClient createNewProductMessageSqsClient;
@@ -84,6 +85,7 @@ class CreateNewProductMessageSqsClientTest extends LocalstackIntegrationTest {
     }
 
     @Test
+    @DefaultLocale("en_US")
     @DisplayName("should not send a new product message to a SQS queue when message is invalid")
     public void t3() {
 

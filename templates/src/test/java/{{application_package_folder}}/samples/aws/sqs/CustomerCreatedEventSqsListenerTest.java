@@ -11,7 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
@@ -24,9 +23,8 @@ import static org.awaitility.Awaitility.await;
 
 /**
  * Here we start the listener on startup, and we guarantee that
- * it is stopped in the end of all tests by closing the application context
+ * it is stopped in the end of all tests by closing the application context (thanks to @DirtiesContext)
  */
-@DirtiesContext
 @TestPropertySource(properties = {
         "cloud.aws.sqs.listener.auto-startup = true"
 })

@@ -27,13 +27,13 @@ import java.util.Map;
         name = "cloud.aws.sqs.listener.auto-startup", havingValue = "true"
 )
 @Component
-public class CustomerCreatedEventSqsListener {
+public class CustomerCreatedEventSqsConsumer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerCreatedEventSqsListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerCreatedEventSqsConsumer.class);
 
     private final CustomerRepository repository;
 
-    public CustomerCreatedEventSqsListener(CustomerRepository repository) {
+    public CustomerCreatedEventSqsConsumer(CustomerRepository repository) {
         this.repository = repository;
     }
 
@@ -72,6 +72,7 @@ public class CustomerCreatedEventSqsListener {
         );
 
         // TODO: write your error handling logic here...
+        // TODO: also, you can annotate this method with @SendTo("myQueue-DLQ") to forward the message to another queue
     }
 
 }

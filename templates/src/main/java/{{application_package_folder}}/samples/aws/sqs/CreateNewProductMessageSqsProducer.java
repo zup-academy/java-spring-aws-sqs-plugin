@@ -11,15 +11,15 @@ import javax.validation.Valid;
 
 @Service
 @Validated
-public class CreateNewProductMessageSqsClient {
+public class CreateNewProductMessageSqsProducer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreateNewProductMessageSqsClient.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateNewProductMessageSqsProducer.class);
 
     private final String queueName;
     private final QueueMessagingTemplate sqsTemplate;
 
-    public CreateNewProductMessageSqsClient(QueueMessagingTemplate sqsTemplate,
-                                            @Value("${samples.aws.sqs.producer-queue}") String queueName) {
+    public CreateNewProductMessageSqsProducer(QueueMessagingTemplate sqsTemplate,
+                                              @Value("${samples.aws.sqs.producer-queue}") String queueName) {
         this.sqsTemplate = sqsTemplate;
         this.queueName = queueName;
     }

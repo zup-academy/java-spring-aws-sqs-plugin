@@ -20,10 +20,10 @@ import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class CreateNewProductMessageSqsClientTest extends SqsIntegrationTest {
+class CreateNewProductMessageSqsProducerTest extends SqsIntegrationTest {
 
     @Autowired
-    private CreateNewProductMessageSqsClient createNewProductMessageSqsClient;
+    private CreateNewProductMessageSqsProducer createNewProductMessageSqsProducer;
 
     @Autowired
     private QueueMessagingTemplate sqsTemplate;
@@ -55,7 +55,7 @@ class CreateNewProductMessageSqsClientTest extends SqsIntegrationTest {
         );
 
         // action
-        createNewProductMessageSqsClient.send(message);
+        createNewProductMessageSqsProducer.send(message);
 
         // validation
         NewProductMessage messageFromQueue = sqsTemplate
@@ -73,7 +73,7 @@ class CreateNewProductMessageSqsClientTest extends SqsIntegrationTest {
 
         // action
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            createNewProductMessageSqsClient.send(null);
+            createNewProductMessageSqsProducer.send(null);
         });
         
         // validation
@@ -98,7 +98,7 @@ class CreateNewProductMessageSqsClientTest extends SqsIntegrationTest {
 
         // action
         ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> {
-            createNewProductMessageSqsClient.send(invalidMessage);
+            createNewProductMessageSqsProducer.send(invalidMessage);
         });
 
         // validation

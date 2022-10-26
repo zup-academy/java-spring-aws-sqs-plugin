@@ -28,7 +28,7 @@ import static org.awaitility.Awaitility.await;
 @TestPropertySource(properties = {
         "cloud.aws.sqs.listener.auto-startup = true"
 })
-class CustomerCreatedEventSqsListenerTest extends SqsIntegrationTest {
+class CustomerCreatedEventSqsConsumerTest extends SqsIntegrationTest {
 
     @Autowired
     private QueueMessagingTemplate sqsTemplate;
